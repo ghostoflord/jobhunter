@@ -16,12 +16,16 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public List<User> GetUserHandle() {
+    public List<User> fetchAllUser() {
         return this.userRepository.findAll();
     }
 
-    public Optional<User> GetUserById(long id) {
-        return this.userRepository.findById(id);
+    public User fetchUserById(long id) {
+        Optional<User> userOptional = this.userRepository.findById(id);
+        if (userOptional.isPresent()) {
+            return userOptional.get();
+        }
+        return null;
     }
 
     public User SaveUserHandle(User user) {

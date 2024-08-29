@@ -23,15 +23,14 @@ public class UserController {
     }
 
     @GetMapping("/user")
-    public List<User> getUser() {
-        List<User> hadesUser = this.userService.GetUserHandle();
+    public List<User> getAllUser() {
+        List<User> hadesUser = this.userService.fetchAllUser();
         return hadesUser;
     }
 
     @GetMapping("/user/{id}")
-    public Optional<User> getUserById(@PathVariable("id") long id) {
-        Optional<User> getUserId = this.userService.GetUserById(id);
-        return getUserId;
+    public User getUserById(@PathVariable("id") long id) {
+        return this.userService.fetchUserById(id);
     }
 
     @PostMapping("/user")
@@ -43,6 +42,6 @@ public class UserController {
     @DeleteMapping("/user/{id}")
     public String deleteUser(@PathVariable("id") long id) {
         this.userService.DeleteUser(id);
-        return "succcess";
+        return "success";
     }
 }
