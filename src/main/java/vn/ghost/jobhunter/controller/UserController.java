@@ -1,6 +1,8 @@
 package vn.ghost.jobhunter.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import vn.ghost.jobhunter.domain.User;
@@ -14,13 +16,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/user/create")
-    public String createUser() {
-        User user = new User();
-        user.setEmail("ghost@gmail.com");
-        user.setName("ghost");
-        user.setPassword("555");
-        this.userService.SaveUserHandle(user);
-        return "from create user";
+    @PostMapping("/user/create")
+    public User createUser(@RequestBody User postManUser) {
+        User ghostUser = this.userService.SaveUserHandle(postManUser);
+        return ghostUser;
     }
 }
