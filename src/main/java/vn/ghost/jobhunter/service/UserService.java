@@ -1,5 +1,8 @@
 package vn.ghost.jobhunter.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import vn.ghost.jobhunter.domain.User;
@@ -13,11 +16,19 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User SaveUserHandle(User user) {
-       return this.userRepository.save(user);
+    public List<User> GetUserHandle() {
+        return this.userRepository.findAll();
     }
 
-    public void DeleteUser(long id){
+    public Optional<User> GetUserById(long id) {
+        return this.userRepository.findById(id);
+    }
+
+    public User SaveUserHandle(User user) {
+        return this.userRepository.save(user);
+    }
+
+    public void DeleteUser(long id) {
         this.userRepository.deleteById(id);
     }
 }
