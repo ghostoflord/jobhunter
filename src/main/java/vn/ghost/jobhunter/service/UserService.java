@@ -28,6 +28,18 @@ public class UserService {
         return null;
     }
 
+    public User handleUpdateUser(User reqUser) {
+        User currentUser = this.fetchUserById(reqUser.getId());
+        if (currentUser != null) {
+            currentUser.setEmail(reqUser.getEmail());
+            currentUser.setName(reqUser.getName());
+            currentUser.setPassword(reqUser.getPassword());
+            // save update
+            currentUser = this.userRepository.save(currentUser);
+        }
+        return currentUser;
+    }
+
     public User SaveUserHandle(User user) {
         return this.userRepository.save(user);
     }
