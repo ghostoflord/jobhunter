@@ -1,4 +1,4 @@
-package vn.ghost.jobhunter.service.error;
+package vn.ghost.jobhunter.util.error;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
