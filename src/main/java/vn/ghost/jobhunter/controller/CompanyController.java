@@ -27,4 +27,5 @@ public class CompanyController {
         Company ghostCompany = this.companyService.handleCreateCompany(company);
         return ResponseEntity.status(HttpStatus.CREATED).body((ghostCompany));
     }
+
 }

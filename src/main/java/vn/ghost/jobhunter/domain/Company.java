@@ -7,6 +7,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.PrePersist;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -36,4 +37,10 @@ public class Company {
     private String createdBy;
 
     private String updatedBy;
+
+    @PrePersist
+    public void handleBeforeCreate() {
+        this.createdBy = "ghost";
+        this.createdAt = Instant.now();
+    }
 }
