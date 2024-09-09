@@ -10,7 +10,7 @@ import vn.ghost.jobhunter.util.error.IdInvalidException;
 public class HelloController {
 
     @GetMapping("/")
-
+    @CrossOrigin
     public String getHelloWorld() throws IdInvalidException {
         return "Hello World ";
     }
