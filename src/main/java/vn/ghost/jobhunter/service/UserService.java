@@ -40,11 +40,11 @@ public class UserService {
         return currentUser;
     }
 
-    public User SaveUserHandle(User user) {
+    public User handleCreateUser(User user) {
         return this.userRepository.save(user);
     }
 
-    public void DeleteUser(long id) {
+    public void handleDeleteUser(long id) {
         this.userRepository.deleteById(id);
     }
 

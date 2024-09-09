@@ -41,19 +41,19 @@ public class UserController {
     public ResponseEntity<User> createUser(@RequestBody User postManUser) {
         String hashPassword = this.passwordEncoder.encode(postManUser.getPassword());
         postManUser.setPassword(hashPassword);
-        User ghostUser = this.userService.SaveUserHandle(postManUser);
+        User ghostUser = this.userService.handleCreateUser(postManUser);
         return ResponseEntity.status(HttpStatus.CREATED).body((ghostUser));
     }
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<String> deleteUser(@PathVariable("id") long id) {
-        this.userService.DeleteUser(id);
+        this.userService.handleDeleteUser(id);
         return ResponseEntity.ok("success delete user");
     }
 
     @PutMapping("/users")
     public ResponseEntity<User> updateUser(@RequestBody User user) {
-        User ghostUser = this.userService.SaveUserHandle(user);
+        User ghostUser = this.userService.handleUpdateUser(user);
         return ResponseEntity.ok(ghostUser);
     }
 }

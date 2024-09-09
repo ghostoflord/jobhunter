@@ -19,12 +19,12 @@ public class UserDetailCustom implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-
         vn.ghost.jobhunter.domain.User user = this.userService.handleGetUserByUsername(username);
-        // TODO Auto-generated method stub
+
         return new User(
                 user.getEmail(),
                 user.getPassword(),
                 Collections.singletonList(new SimpleGrantedAuthority("ROLE_USER")));
+
     }
 }
