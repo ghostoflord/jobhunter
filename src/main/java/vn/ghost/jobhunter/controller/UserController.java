@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.data.util.Optionals;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.turkraft.springfilter.boot.Filter;
 
 import vn.ghost.jobhunter.domain.User;
 import vn.ghost.jobhunter.domain.dto.ResultPaginationDTO;
@@ -34,18 +37,11 @@ public class UserController {
 
     @GetMapping("/users")
     public ResponseEntity<ResultPaginationDTO> getAllUser(
-            @RequestParam("current") Optional<String> currentOptional,
-            @RequestParam("pageSize") Optional<String> pageSizeOptional) {
-        String sCurrent = currentOptional.isPresent() ? currentOptional.get() : "";
-        String sPageSize = pageSizeOptional.isPresent() ? pageSizeOptional.get() : "";
+            @Filter Specification<User> spec,
+            Pageable pageable) {
 
-        int current = Integer.parseInt(sCurrent);
-        int pageSize = Integer.parseInt(sPageSize);
-
-        Pageable pageable = PageRequest.of(current - 1, pageSize);
-
-        // return ResponseEntity.ok(this.userService.fetchAllUser());
-        return ResponseEntity.status(HttpStatus.OK).body(this.userService.fetchAllUser(pageable));
+        return ResponseEntity.status(HttpStatus.OK).body(
+                this.userService.fetchAllUser(spec, pageable));
     }
 
     @GetMapping("/users/{id}")

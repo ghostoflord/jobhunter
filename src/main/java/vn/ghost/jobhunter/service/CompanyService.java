@@ -2,13 +2,13 @@ package vn.ghost.jobhunter.service;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 import vn.ghost.jobhunter.domain.Company;
-import vn.ghost.jobhunter.domain.User;
 import vn.ghost.jobhunter.domain.dto.Meta;
 import vn.ghost.jobhunter.domain.dto.ResultPaginationDTO;
 import vn.ghost.jobhunter.repository.CompanyRepository;
@@ -27,13 +27,13 @@ public class CompanyService {
     }
 
     // get company
-    public ResultPaginationDTO handleGetCompany(Pageable pageable) {
-        Page<Company> pCompany = this.companyRepository.findAll(pageable);
+    public ResultPaginationDTO handleGetCompany(Specification<Company> spec, Pageable pageable) {
+        Page<Company> pCompany = this.companyRepository.findAll(spec, pageable);
         ResultPaginationDTO rs = new ResultPaginationDTO();
         Meta mt = new Meta();
 
-        mt.setPage(pCompany.getNumber() + 1);
-        mt.setPageSize(pCompany.getSize());
+        mt.setPage(pageable.getPageNumber() + 1);
+        mt.setPageSize(pageable.getPageSize());
 
         mt.setPages(pCompany.getTotalPages());
         mt.setTotal(pCompany.getTotalElements());
