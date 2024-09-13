@@ -24,6 +24,7 @@ import com.turkraft.springfilter.boot.Filter;
 import vn.ghost.jobhunter.domain.User;
 import vn.ghost.jobhunter.domain.dto.ResultPaginationDTO;
 import vn.ghost.jobhunter.service.UserService;
+import vn.ghost.jobhunter.util.annotation.ApiMessage;
 
 @RestController
 public class UserController {
@@ -36,6 +37,7 @@ public class UserController {
     }
 
     @GetMapping("/users")
+    @ApiMessage("fetch all user")
     public ResponseEntity<ResultPaginationDTO> getAllUser(
             @Filter Specification<User> spec,
             Pageable pageable) {
