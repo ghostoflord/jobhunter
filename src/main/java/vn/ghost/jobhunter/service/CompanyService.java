@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 import vn.ghost.jobhunter.domain.Company;
-import vn.ghost.jobhunter.domain.dto.ResultPaginationDTO;
+import vn.ghost.jobhunter.domain.response.ResultPaginationDTO;
 import vn.ghost.jobhunter.repository.CompanyRepository;
 
 @Service

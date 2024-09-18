@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.turkraft.springfilter.boot.Filter;
 import vn.ghost.jobhunter.domain.Company;
 import vn.ghost.jobhunter.domain.User;
-import vn.ghost.jobhunter.domain.dto.ResultPaginationDTO;
+import vn.ghost.jobhunter.domain.response.ResultPaginationDTO;
 import vn.ghost.jobhunter.service.CompanyService;
 
 @RestController

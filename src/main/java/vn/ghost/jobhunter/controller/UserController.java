@@ -24,9 +24,9 @@ import com.turkraft.springfilter.boot.Filter;
 
 import jakarta.validation.Valid;
 import vn.ghost.jobhunter.domain.User;
-import vn.ghost.jobhunter.domain.dto.ResCreateUserDTO;
-import vn.ghost.jobhunter.domain.dto.ResUpdateUserDTO;
-import vn.ghost.jobhunter.domain.dto.ResultPaginationDTO;
+import vn.ghost.jobhunter.domain.response.ResCreateUserDTO;
+import vn.ghost.jobhunter.domain.response.ResUpdateUserDTO;
+import vn.ghost.jobhunter.domain.response.ResultPaginationDTO;
 import vn.ghost.jobhunter.service.UserService;
 import vn.ghost.jobhunter.util.annotation.ApiMessage;
 import vn.ghost.jobhunter.util.error.IdInvalidException;

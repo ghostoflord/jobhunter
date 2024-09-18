@@ -10,10 +10,10 @@ import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import vn.ghost.jobhunter.domain.User;
-import vn.ghost.jobhunter.domain.dto.ResCreateUserDTO;
-import vn.ghost.jobhunter.domain.dto.ResUpdateUserDTO;
-import vn.ghost.jobhunter.domain.dto.ResUserDTO;
-import vn.ghost.jobhunter.domain.dto.ResultPaginationDTO;
+import vn.ghost.jobhunter.domain.response.ResCreateUserDTO;
+import vn.ghost.jobhunter.domain.response.ResUpdateUserDTO;
+import vn.ghost.jobhunter.domain.response.ResUserDTO;
+import vn.ghost.jobhunter.domain.response.ResultPaginationDTO;
 import vn.ghost.jobhunter.repository.UserRepository;
 
 @Service
