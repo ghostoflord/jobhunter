@@ -2,7 +2,6 @@ package vn.ghost.jobhunter.domain;
 
 import java.time.Instant;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.util.List;
@@ -54,6 +53,10 @@ public class Company {
     @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
     @JsonIgnore
     List<User> users;
+
+    @OneToMany(mappedBy = "company", fetch = FetchType.LAZY)
+    @JsonIgnore
+    List<Job> jobs;
 
     @PrePersist
     public void handleBeforeCreate() {
