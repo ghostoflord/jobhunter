@@ -1,4 +1,4 @@
-package vn.ghost.jobhunter.domain;
+package vn.ghost.jobhunter.domain.response;
 
 public class RestResponse<T> {
 
