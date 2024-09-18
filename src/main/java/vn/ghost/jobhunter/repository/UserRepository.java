@@ -1,11 +1,13 @@
 package vn.ghost.jobhunter.repository;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import vn.ghost.jobhunter.domain.Company;
 import vn.ghost.jobhunter.domain.User;
 
 @Repository
@@ -16,5 +18,5 @@ public interface UserRepository extends JpaRepository<User, Long>, JpaSpecificat
 
     User findByRefreshTokenAndEmail(String token ,String email);
 
-
+    List<User> findByCompany(Company company);
 }

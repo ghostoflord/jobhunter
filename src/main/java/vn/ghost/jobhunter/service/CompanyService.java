@@ -9,15 +9,19 @@ import java.util.List;
 import java.util.Optional;
 
 import vn.ghost.jobhunter.domain.Company;
+import vn.ghost.jobhunter.domain.User;
 import vn.ghost.jobhunter.domain.response.ResultPaginationDTO;
 import vn.ghost.jobhunter.repository.CompanyRepository;
+import vn.ghost.jobhunter.repository.UserRepository;
 
 @Service
 public class CompanyService {
     private final CompanyRepository companyRepository;
+    private final UserRepository userRepository;
 
-    public CompanyService(CompanyRepository companyRepository) {
+    public CompanyService(CompanyRepository companyRepository, UserRepository userRepository) {
         this.companyRepository = companyRepository;
+        this.userRepository = userRepository;
     }
 
     // post company
@@ -58,6 +62,16 @@ public class CompanyService {
 
     // delete
     public void handleDeleteCompany(long id) {
-        this.companyRepository.deleteById(id);
+        Optional<Company> comOptional = this.companyRepository.findById(id);
+        if (comOptional.isPresent()) {
+            Company com = comOptional.get();
+            // fetch all user belong to this company
+            List<User> users = this.userRepository.findByCompany(com);
+            this.userRepository.deleteAll(users);
+        }
+    }
+
+    public Optional<Company> findById(long id) {
+        return this.companyRepository.findById(id);
     }
 }
