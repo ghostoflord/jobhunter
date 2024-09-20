@@ -1,6 +1,7 @@
-package vn.ghost.jobhunter.domain.response;
+package vn.ghost.jobhunter.domain.response.job;
 
 import java.time.Instant;
+import java.util.List;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,17 +12,21 @@ import vn.ghost.jobhunter.util.constant.LevelEnum;
 public class ResCreateJobDTO {
     private long id;
     private String name;
+
     private String location;
+
     private double salary;
+
     private int quantity;
+
     private LevelEnum level;
-    private String description;
+
     private Instant startDate;
     private Instant endDate;
-    private boolean active;
+    private boolean isActive;
+
+    private List<String> skills;
+
     private Instant createdAt;
-    private Instant updatedAt;
     private String createdBy;
-    private String updatedBy;
-    
 }
