@@ -8,6 +8,8 @@ import org.springframework.http.server.ServletServerHttpResponse;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseBodyAdvice;
 
+import org.springframework.core.io.Resource;
+
 import jakarta.servlet.http.HttpServletResponse;
 import vn.ghost.jobhunter.domain.response.RestResponse;
 import vn.ghost.jobhunter.util.annotation.ApiMessage;
@@ -33,7 +35,8 @@ public class FormatRestResponse implements ResponseBodyAdvice<Object> {
 
         RestResponse<Object> res = new RestResponse<Object>();
         res.setStatusCode(status);
-        if (body instanceof String) {
+
+        if (body instanceof String || body instanceof Resource) {
             return body;
         }
         if (status >= 400) {
