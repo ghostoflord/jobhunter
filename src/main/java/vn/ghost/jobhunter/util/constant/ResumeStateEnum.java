@@ -1,5 +1,5 @@
 package vn.ghost.jobhunter.util.constant;
 
-public enum StatusEnum {
+public enum ResumeStateEnum {
     PENDING, REVIEWING, APPROVED, REJECTED
 }

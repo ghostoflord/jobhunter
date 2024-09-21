@@ -3,6 +3,8 @@ package vn.ghost.jobhunter.domain;
 import java.time.Instant;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -14,7 +16,7 @@ import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 import vn.ghost.jobhunter.util.SecurityUtil;
-import vn.ghost.jobhunter.util.constant.StatusEnum;
+import vn.ghost.jobhunter.util.constant.ResumeStateEnum;
 
 @Entity
 @Table(name = "resumes")
@@ -26,7 +28,9 @@ public class Resume {
     private Long id;
     private String email;
     private String url;
-    private StatusEnum Status;
+
+    @Enumerated(EnumType.STRING)
+    private ResumeStateEnum Status;
     private Instant createdAt;
     private Instant updatedAt;
     private String createdBy;
