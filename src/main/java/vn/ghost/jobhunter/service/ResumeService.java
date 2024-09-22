@@ -92,6 +92,10 @@ public class ResumeService {
         res.setUpdatedAt(resume.getUpdatedAt());
         res.setUpdatedBy(resume.getUpdatedBy());
 
+        if (resume.getJob() != null) {
+            res.setCompanyName(resume.getJob().getCompany().getName());
+        }
+
         res.setUser(new ResFetchResumeDTO.UserResume(resume.getUser().getId(), resume.getUser().getName()));
         res.setJob(new ResFetchResumeDTO.JobResume(resume.getJob().getId(), resume.getJob().getName()));
 
@@ -114,7 +118,6 @@ public class ResumeService {
         // remove sensitive data
         List<ResFetchResumeDTO> listResume = pageUser.getContent()
                 .stream().map(item -> this.getResume(item))
-                // .collect(Collectors.toList());
                 .collect(Collectors.toList());
 
         rs.setResult(listResume);

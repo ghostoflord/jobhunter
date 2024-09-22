@@ -23,6 +23,7 @@ import vn.ghost.jobhunter.domain.Company;
 import vn.ghost.jobhunter.domain.User;
 import vn.ghost.jobhunter.domain.response.ResultPaginationDTO;
 import vn.ghost.jobhunter.service.CompanyService;
+import vn.ghost.jobhunter.util.annotation.ApiMessage;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -59,5 +60,12 @@ public class CompanyController {
     public ResponseEntity<String> deleteCompany(@PathVariable("id") long id) {
         this.companyService.handleDeleteCompany(id);
         return ResponseEntity.ok("success delete user");
+    }
+
+    @GetMapping("/companies/{id}")
+    @ApiMessage("fetch company by id")
+    public ResponseEntity<Company> fetchCompanyById(@PathVariable("id") long id) {
+        Optional<Company> cOptional = this.companyService.findById(id);
+        return ResponseEntity.ok().body(cOptional.get());
     }
 }
