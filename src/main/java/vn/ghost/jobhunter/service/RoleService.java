@@ -1,24 +1,30 @@
 package vn.ghost.jobhunter.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import vn.ghost.jobhunter.domain.Permission;
 import vn.ghost.jobhunter.domain.Role;
 import vn.ghost.jobhunter.domain.User;
 import vn.ghost.jobhunter.domain.response.ResultPaginationDTO;
+import vn.ghost.jobhunter.repository.PermissionRepository;
 import vn.ghost.jobhunter.repository.RoleRepository;
 
 @Service
 public class RoleService {
 
     private final RoleRepository roleRepository;
+    private final PermissionRepository permissionRepository;
 
-    public RoleService(RoleRepository roleRepository) {
+    public RoleService(RoleRepository roleRepository, PermissionRepository permissionRepository) {
         this.roleRepository = roleRepository;
+        this.permissionRepository = permissionRepository;
     }
 
     // get role by id
@@ -54,17 +60,41 @@ public class RoleService {
 
     // post role
     public Role handleCreateRole(Role role) {
+        // check permissions
+        if (role.getPermissions() != null) {
+            List<Long> reqPermissions = role.getPermissions()
+                    .stream().map(x -> x.getId())
+                    .collect(Collectors.toList());
+
+            List<Permission> dbPermissions = this.permissionRepository.findByIdIn(reqPermissions);
+            role.setPermissions(dbPermissions);
+        }
         return this.roleRepository.save(role);
     }
 
     // put role
     public Role handleUpdateRole(Role reqRole) {
-        Role currentRole = this.fetchRoleById(reqRole.getId());
-        if (currentRole != null) {
-            currentRole.setName(reqRole.getName());
-            currentRole = this.roleRepository.save(currentRole);
+        Role roleDB = this.fetchRoleById(reqRole.getId());
+        // check permissions
+        if (reqRole.getPermissions() != null) {
+            List<Long> reqPermissions = reqRole.getPermissions()
+                    .stream().map(x -> x.getId())
+                    .collect(Collectors.toList());
+
+            List<Permission> dbPermissions = this.permissionRepository.findByIdIn(reqPermissions);
+            reqRole.setPermissions(dbPermissions);
         }
-        return currentRole;
+
+        roleDB.setName(reqRole.getName());
+        roleDB.setDescription(reqRole.getDescription());
+        roleDB.setActive(reqRole.isActive());
+        roleDB.setPermissions(reqRole.getPermissions());
+        roleDB = this.roleRepository.save(roleDB);
+        return roleDB;
+    }
+
+    public boolean existByName(String name) {
+        return this.roleRepository.existsByName(name);
     }
 
 }

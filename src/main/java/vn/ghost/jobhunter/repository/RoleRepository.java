@@ -8,4 +8,5 @@ import vn.ghost.jobhunter.domain.Role;
 
 @Repository
 public interface RoleRepository extends JpaRepository<Role, Long>, JpaSpecificationExecutor<Role> {
+    boolean existsByName(String name);
 }

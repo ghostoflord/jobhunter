@@ -49,6 +49,10 @@ public class PermissionController {
     @ApiMessage("Create a new user")
     public ResponseEntity<Permission> createPermission(@Valid @RequestBody Permission postManPermission)
             throws IdInvalidException {
+        // check exist
+        if (this.permissionService.isPermissionExist(postManPermission)) {
+            throw new IdInvalidException("Permission đã tồn tại.");
+        }
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(this.permissionService.handleCreatePermission(postManPermission));
     }
@@ -57,6 +61,15 @@ public class PermissionController {
     @PutMapping("/permission")
     public ResponseEntity<Permission> updatePermission(@Valid @RequestBody Permission permission)
             throws IdInvalidException {
+        // check exist by id
+        if (this.permissionService.fetchPermissionById(permission.getId()) == null) {
+            throw new IdInvalidException("Permission với id = " + permission.getId() + " không tồn tại.");
+        }
+
+        // check exist by module, apiPath and method
+        if (this.permissionService.isPermissionExist(permission)) {
+            throw new IdInvalidException("Permission đã tồn tại.");
+        }
         return ResponseEntity.ok(this.permissionService.handleUpdatePermission(permission));
     }
 
@@ -65,6 +78,10 @@ public class PermissionController {
     @ApiMessage("Delete a user")
     public ResponseEntity<Void> deleteUser(@PathVariable("id") long id)
             throws IdInvalidException {
+        // check exist by id
+        if (this.permissionService.fetchPermissionById(id) == null) {
+            throw new IdInvalidException("Permission với id = " + id + " không tồn tại.");
+        }
         this.permissionService.handleDeletePermission(id);
         return ResponseEntity.ok(null);
     }

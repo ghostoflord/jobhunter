@@ -66,6 +66,20 @@ public class PermissionService {
 
     // delete permission
     public void handleDeletePermission(long id) {
-        this.permissionRepository.deleteById(id);
+        // delete permission_role
+        Optional<Permission> permissionOptional = this.permissionRepository.findById(id);
+        Permission currentPermission = permissionOptional.get();
+        currentPermission.getRoles().forEach(role -> role.getPermissions().remove(currentPermission));
+
+        // delete permission
+        this.permissionRepository.delete(currentPermission);
+    }
+
+    //
+    public boolean isPermissionExist(Permission p) {
+        return permissionRepository.existsByModuleAndApiPathAndMethod(
+                p.getModule(),
+                p.getApiPath(),
+                p.getMethod());
     }
 }
