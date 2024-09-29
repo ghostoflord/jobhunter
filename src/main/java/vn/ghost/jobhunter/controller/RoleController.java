@@ -80,6 +80,8 @@ public class RoleController {
         // throw new IdInvalidException("Role với name = " + role.getName() + " đã tồn
         // tại");
         // }
-        return ResponseEntity.status(HttpStatus.CREATED).body(this.roleService.handleUpdateRole(role));
+        // return
+        // ResponseEntity.status(HttpStatus.CREATED).body(this.roleService.handleUpdateRole(role));
+        return ResponseEntity.ok().body(this.roleService.handleUpdateRole(role));
     }
 }
