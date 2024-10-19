@@ -3,6 +3,7 @@ package vn.ghost.jobhunter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 //disable security
 // @SpringBootApplication(exclude = {
@@ -11,6 +12,7 @@ import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 // })
 
 @SpringBootApplication
+@EnableAsync
 public class JobhunterApplication {
 
 	public static void main(String[] args) {

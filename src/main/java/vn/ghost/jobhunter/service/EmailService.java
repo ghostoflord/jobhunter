@@ -54,13 +54,18 @@ public class EmailService {
         }
     }
 
-    public void sendEmailFromTemplateSync(String to, String subject, String templateName) {
+    public void sendEmailFromTemplateSync(
+            String to,
+            String subject,
+            String templateName,
+            String username,
+            Object value) {
+
         Context context = new Context();
-        List<Job> arrJob = this.jobRepository.findAll();
-        String name = "GHOST";
-        context.setVariable("name", name);
-        context.setVariable("jobs", arrJob);
-        String content = this.templateEngine.process(templateName, context);
+        context.setVariable("name", username);
+        context.setVariable("jobs", value);
+
+        String content = templateEngine.process(templateName, context);
         this.sendEmailSync(to, subject, content, false, true);
     }
 
