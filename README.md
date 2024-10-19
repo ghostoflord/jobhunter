@@ -6,8 +6,8 @@ Mọi thông tin về Tác giả Ghost, các bạn có thể tìm kiếm trên g
 
 ## Version java:JDK 17
 ## Extension run on VScode: extension pack Java and spring extension pack;
-## Database:Use Mysql or xampp and heidisql;
+## Database:Use Mysql or xampp + heidisql;
 ## run api with : Post Man;
-## Frontend :use React,Vite,Typescript;
+## Frontend :React-Vite-Typescript;
 
 
