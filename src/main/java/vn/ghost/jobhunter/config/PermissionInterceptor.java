@@ -16,7 +16,12 @@ import vn.ghost.jobhunter.service.UserService;
 import vn.ghost.jobhunter.util.SecurityUtil;
 import vn.ghost.jobhunter.util.error.IdInvalidException;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class PermissionInterceptor implements HandlerInterceptor {
+
+    private final Logger log = LoggerFactory.getLogger(PermissionInterceptor.class);
 
     @Autowired
     UserService userService;
@@ -32,9 +37,10 @@ public class PermissionInterceptor implements HandlerInterceptor {
         String requestURI = request.getRequestURI();
         String httpMethod = request.getMethod();
         System.out.println(">>> RUN preHandle");
-        System.out.println(">>> path= " + path);
+        // System.out.println(">>> path= " + path);
         System.out.println(">>> httpMethod= " + httpMethod);
         System.out.println(">>> requestURI= " + requestURI);
+        log.debug("Request to save path : {}", path);
 
         // check permission
         String email = SecurityUtil.getCurrentUserLogin().isPresent() == true
